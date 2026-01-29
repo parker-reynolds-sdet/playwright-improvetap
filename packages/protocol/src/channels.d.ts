@@ -2082,6 +2082,9 @@ export interface PageChannel extends PageEventTarget, EventTargetChannel {
   mouseClick(params: PageMouseClickParams, progress?: Progress): Promise<PageMouseClickResult>;
   mouseWheel(params: PageMouseWheelParams, progress?: Progress): Promise<PageMouseWheelResult>;
   touchscreenTap(params: PageTouchscreenTapParams, progress?: Progress): Promise<PageTouchscreenTapResult>;
+  touchscreenDown(params: PageTouchscreenDownParams, progress?: Progress): Promise<PageTouchscreenDownResult>;
+  touchscreenMove(params: PageTouchscreenMoveParams, progress?: Progress): Promise<PageTouchscreenMoveResult>;
+  touchscreenUp(params: PageTouchscreenUpParams, progress?: Progress): Promise<PageTouchscreenUpResult>;
   pageErrors(params?: PagePageErrorsParams, progress?: Progress): Promise<PagePageErrorsResult>;
   pdf(params: PagePdfParams, progress?: Progress): Promise<PagePdfResult>;
   requests(params?: PageRequestsParams, progress?: Progress): Promise<PageRequestsResult>;
@@ -2475,6 +2478,30 @@ export type PageTouchscreenTapOptions = {
 
 };
 export type PageTouchscreenTapResult = void;
+export type PageTouchscreenDownParams = {
+  x: number,
+  y: number,
+};
+export type PageTouchscreenDownOptions = {
+
+};
+export type PageTouchscreenDownResult = void;
+export type PageTouchscreenMoveParams = {
+  x: number,
+  y: number,
+};
+export type PageTouchscreenMoveOptions = {
+
+};
+export type PageTouchscreenMoveResult = void;
+export type PageTouchscreenUpParams = {
+  x: number,
+  y: number,
+};
+export type PageTouchscreenUpOptions = {
+
+};
+export type PageTouchscreenUpResult = void;
 export type PagePageErrorsParams = {};
 export type PagePageErrorsOptions = {};
 export type PagePageErrorsResult = {

@@ -1410,6 +1410,21 @@ scheme.PageTouchscreenTapParams = tObject({
   y: tFloat,
 });
 scheme.PageTouchscreenTapResult = tOptional(tObject({}));
+scheme.PageTouchscreenDownParams = tObject({
+  x: tFloat,
+  y: tFloat,
+});
+scheme.PageTouchscreenDownResult = tOptional(tObject({}));
+scheme.PageTouchscreenMoveParams = tObject({
+  x: tFloat,
+  y: tFloat,
+});
+scheme.PageTouchscreenMoveResult = tOptional(tObject({}));
+scheme.PageTouchscreenUpParams = tObject({
+  x: tFloat,
+  y: tFloat,
+});
+scheme.PageTouchscreenUpResult = tOptional(tObject({}));
 scheme.PagePageErrorsParams = tOptional(tObject({}));
 scheme.PagePageErrorsResult = tObject({
   errors: tArray(tType('SerializedError')),

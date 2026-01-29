@@ -171,6 +171,7 @@ export class RawTouchscreenImpl implements input.RawTouchscreen {
   constructor(client: CRSession) {
     this._client = client;
   }
+
   async tap(progress: Progress, x: number, y: number, modifiers: Set<types.KeyboardModifier>) {
     await progress.race(Promise.all([
       this._client.send('Input.dispatchTouchEvent', {
@@ -186,5 +187,33 @@ export class RawTouchscreenImpl implements input.RawTouchscreen {
         touchPoints: []
       }),
     ]));
+  }
+
+  async down(progress: Progress, x: number, y: number, modifiers: Set<types.KeyboardModifier>) {
+    await progress.race(this._client.send('Input.dispatchTouchEvent', {
+      type: 'touchStart',
+      modifiers: toModifiersMask(modifiers),
+      touchPoints: [{
+        x, y
+      }]
+    }));
+  }
+
+  async move(progress: Progress, x: number, y: number, modifiers: Set<types.KeyboardModifier>) {
+    await progress.race(this._client.send('Input.dispatchTouchEvent', {
+      type: 'touchMove',
+      modifiers: toModifiersMask(modifiers),
+      touchPoints: [{
+        x, y
+      }]
+    }));
+  }
+
+  async up(progress: Progress, x: number, y: number, modifiers: Set<types.KeyboardModifier>) {
+    await progress.race(this._client.send('Input.dispatchTouchEvent', {
+      type: 'touchEnd',
+      modifiers: toModifiersMask(modifiers),
+      touchPoints: []
+    }));
   }
 }

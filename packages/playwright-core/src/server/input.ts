@@ -308,6 +308,9 @@ function buildLayoutClosure(layout: keyboardLayout.KeyboardLayout): Map<string, 
 
 export interface RawTouchscreen {
   tap(progress: Progress, x: number, y: number, modifiers: Set<types.KeyboardModifier>): Promise<void>;
+  down(progress: Progress, x: number, y: number, modifiers: Set<types.KeyboardModifier>): Promise<void>;
+  move(progress: Progress, x: number, y: number, modifiers: Set<types.KeyboardModifier>): Promise<void>;
+  up(progress: Progress, x: number, y: number, modifiers: Set<types.KeyboardModifier>): Promise<void>;
 }
 
 export class Touchscreen {
@@ -323,5 +326,23 @@ export class Touchscreen {
     if (!this._page.browserContext._options.hasTouch)
       throw new Error('hasTouch must be enabled on the browser context before using the touchscreen.');
     await this._raw.tap(progress, x, y, this._page.keyboard._modifiers());
+  }
+
+  async down(progress: Progress, x: number, y: number) {
+    if (!this._page.browserContext._options.hasTouch)
+      throw new Error('hasTouch must be enabled on the browser context before using the touchscreen.');
+    await this._raw.down(progress, x, y, this._page.keyboard._modifiers());
+  }
+
+  async move(progress: Progress, x: number, y: number) {
+    if (!this._page.browserContext._options.hasTouch)
+      throw new Error('hasTouch must be enabled on the browser context before using the touchscreen.');
+    await this._raw.move(progress, x, y, this._page.keyboard._modifiers());
+  }
+
+  async up(progress: Progress, x: number, y: number) {
+    if (!this._page.browserContext._options.hasTouch)
+      throw new Error('hasTouch must be enabled on the browser context before using the touchscreen.');
+    await this._raw.up(progress, x, y, this._page.keyboard._modifiers());
   }
 }

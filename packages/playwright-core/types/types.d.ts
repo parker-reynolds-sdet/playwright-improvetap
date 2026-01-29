@@ -21625,6 +21625,46 @@ export interface Touchscreen {
    * @param y Y coordinate relative to the main frame's viewport in CSS pixels.
    */
   tap(x: number, y: number): Promise<void>;
+
+  /**
+   * Dispatches a `touchstart` event.
+   *
+   * @param x X coordinate relative to the main frame's viewport in CSS pixels.
+   * @param y Y coordinate relative to the main frame's viewport in CSS pixels.
+   */
+  down(x: number, y: number): Promise<void>;
+
+  /**
+   * Dispatches a `touchmove` event.
+   *
+   * @param x X coordinate relative to the main frame's viewport in CSS pixels.
+   * @param y Y coordinate relative to the main frame's viewport in CSS pixels.
+   */
+  move(x: number, y: number): Promise<void>;
+
+  /**
+   * Dispatches a `touchend` event.
+   *
+   * @param x X coordinate relative to the main frame's viewport in CSS pixels.
+   * @param y Y coordinate relative to the main frame's viewport in CSS pixels.
+   */
+  up(x: number, y: number): Promise<void>;
+
+  /**
+   * Performs a tap and drag gesture by dispatching `touchstart`, `touchmove`, and `touchend` events.
+   *
+   * @param startX Starting X coordinate relative to the main frame's viewport in CSS pixels.
+   * @param startY Starting Y coordinate relative to the main frame's viewport in CSS pixels.
+   * @param endX Ending X coordinate relative to the main frame's viewport in CSS pixels.
+   * @param endY Ending Y coordinate relative to the main frame's viewport in CSS pixels.
+   * @param options Optional configuration.
+   */
+  tapAndDrag(startX: number, startY: number, endX: number, endY: number, options?: {
+    /**
+     * Number of intermediate move events to dispatch. Defaults to 10.
+     */
+    steps?: number;
+  }): Promise<void>;
 }
 
 /**

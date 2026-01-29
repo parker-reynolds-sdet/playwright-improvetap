@@ -132,14 +132,18 @@ export class RawTouchscreenImpl implements input.RawTouchscreen {
   }
 
   async tap(progress: Progress, x: number, y: number, modifiers: Set<types.KeyboardModifier>) {
+    // BiDi touch events - to be implemented when spec is available
   }
-}
 
-function toBidiButton(button: string): number {
-  switch (button) {
-    case 'left': return 0;
-    case 'right': return 2;
-    case 'middle': return 1;
+  async down(progress: Progress, x: number, y: number, modifiers: Set<types.KeyboardModifier>) {
+    // BiDi touch events - to be implemented when spec is available
   }
-  throw new Error('Unknown button: ' + button);
+
+  async move(progress: Progress, x: number, y: number, modifiers: Set<types.KeyboardModifier>) {
+    // BiDi touch events - to be implemented when spec is available
+  }
+
+  async up(progress: Progress, x: number, y: number, modifiers: Set<types.KeyboardModifier>) {
+    // BiDi touch events - to be implemented when spec is available
+  }
 }

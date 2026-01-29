@@ -1898,6 +1898,36 @@ Page:
         slowMo: true
         snapshot: true
         pausesBeforeAction: true
+    
+    touchscreenDown:
+      title: Touch down
+      parameters:
+        x: float
+        y: float
+      flags:
+        slowMo: true
+        snapshot: true
+        pausesBeforeAction: true
+
+    touchscreenMove:
+      title: Touch move
+      parameters:
+        x: float
+        y: float
+      flags:
+        slowMo: true
+        snapshot: false
+        pausesBeforeAction: false
+
+    touchscreenUp:
+      title: Touch up
+      parameters:
+        x: float
+        y: float
+      flags:
+        slowMo: true
+        snapshot: true
+        pausesBeforeAction: false
 
     pageErrors:
       title: Get page errors

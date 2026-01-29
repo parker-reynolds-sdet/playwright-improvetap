@@ -186,4 +186,29 @@ export class RawTouchscreenImpl implements input.RawTouchscreen {
       modifiers: toModifiersMask(modifiers),
     }));
   }
+
+  async down(progress: Progress, x: number, y: number, modifiers: Set<types.KeyboardModifier>) {
+    await progress.race(this._pageProxySession.send('Input.dispatchTouchEvent', {
+      type: 'touchStart',
+      touchPoints: [{ x, y, id: 0 }],
+      modifiers: toModifiersMask(modifiers),
+    }));
+  }
+
+  async move(progress: Progress, x: number, y: number, modifiers: Set<types.KeyboardModifier>) {
+    await progress.race(this._pageProxySession.send('Input.dispatchTouchEvent', {
+      type: 'touchMove',
+      touchPoints: [{ x, y, id: 0 }],
+      modifiers: toModifiersMask(modifiers),
+    }));
+  }
+
+  async up(progress: Progress, x: number, y: number, modifiers: Set<types.KeyboardModifier>) {
+    await progress.race(this._pageProxySession.send('Input.dispatchTouchEvent', {
+      type: 'touchEnd',
+      touchPoints: [{ x, y, id: 0 }],
+      modifiers: toModifiersMask(modifiers),
+    }));
+  }
+}
 }

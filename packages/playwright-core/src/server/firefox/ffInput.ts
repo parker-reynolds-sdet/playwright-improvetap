@@ -163,10 +163,35 @@ export class RawTouchscreenImpl implements input.RawTouchscreen {
   constructor(client: FFSession) {
     this._client = client;
   }
+
   async tap(progress: Progress, x: number, y: number, modifiers: Set<types.KeyboardModifier>) {
     await progress.race(this._client.send('Page.dispatchTapEvent', {
       x,
       y,
+      modifiers: toModifiersMask(modifiers),
+    }));
+  }
+
+  async down(progress: Progress, x: number, y: number, modifiers: Set<types.KeyboardModifier>) {
+    await progress.race(this._client.send('Page.dispatchTouchEvent', {
+      type: 'touchStart',
+      touchPoints: [{ x, y }],
+      modifiers: toModifiersMask(modifiers),
+    }));
+  }
+
+  async move(progress: Progress, x: number, y: number, modifiers: Set<types.KeyboardModifier>) {
+    await progress.race(this._client.send('Page.dispatchTouchEvent', {
+      type: 'touchMove',
+      touchPoints: [{ x, y }],
+      modifiers: toModifiersMask(modifiers),
+    }));
+  }
+
+  async up(progress: Progress, x: number, y: number, modifiers: Set<types.KeyboardModifier>) {
+    await progress.race(this._client.send('Page.dispatchTouchEvent', {
+      type: 'touchEnd',
+      touchPoints: [{ x, y }],
       modifiers: toModifiersMask(modifiers),
     }));
   }
