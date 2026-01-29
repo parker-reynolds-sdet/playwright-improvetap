@@ -21614,6 +21614,30 @@ export interface Selectors {
  */
 export interface Touchscreen {
   /**
+   * Dispatches a `touchstart` event.
+   *
+   * **NOTE** Most of the time, you should use
+   * [touchscreen.tapAndDrag(startX, startY, endX, endY[, options])](https://playwright.dev/docs/api/class-touchscreen#touchscreen-tap-and-drag)
+   * instead.
+   *
+   * @param x X coordinate relative to the main frame's viewport in CSS pixels.
+   * @param y Y coordinate relative to the main frame's viewport in CSS pixels.
+   */
+  down(x: number, y: number): Promise<void>;
+
+  /**
+   * Dispatches a `touchmove` event.
+   *
+   * **NOTE** Most of the time, you should use
+   * [touchscreen.tapAndDrag(startX, startY, endX, endY[, options])](https://playwright.dev/docs/api/class-touchscreen#touchscreen-tap-and-drag)
+   * instead.
+   *
+   * @param x X coordinate relative to the main frame's viewport in CSS pixels.
+   * @param y Y coordinate relative to the main frame's viewport in CSS pixels.
+   */
+  move(x: number, y: number): Promise<void>;
+
+  /**
    * Dispatches a `touchstart` and `touchend` event with a single touch at the position
    * ([`x`](https://playwright.dev/docs/api/class-touchscreen#touchscreen-tap-option-x),[`y`](https://playwright.dev/docs/api/class-touchscreen#touchscreen-tap-option-y)).
    *
@@ -21625,6 +21649,41 @@ export interface Touchscreen {
    * @param y Y coordinate relative to the main frame's viewport in CSS pixels.
    */
   tap(x: number, y: number): Promise<void>;
+
+  /**
+   * Performs a tap and drag gesture by dispatching `touchstart`, multiple `touchmove`, and `touchend` events.
+   *
+   * **Usage**
+   *
+   * ```js
+   * await page.touchscreen.tapAndDrag(100, 100, 200, 200);
+   * ```
+   *
+   * @param startX Starting X coordinate relative to the main frame's viewport in CSS pixels.
+   * @param startY Starting Y coordinate relative to the main frame's viewport in CSS pixels.
+   * @param endX Ending X coordinate relative to the main frame's viewport in CSS pixels.
+   * @param endY Ending Y coordinate relative to the main frame's viewport in CSS pixels.
+   * @param options
+   */
+  tapAndDrag(startX: number, startY: number, endX: number, endY: number, options?: {
+    /**
+     * Number of intermediate `touchmove` events to dispatch between the start and end positions. Defaults to `10`.
+     * Increasing this value will produce smoother drag animations but may slow down the test.
+     */
+    steps?: number;
+  }): Promise<void>;
+
+  /**
+   * Dispatches a `touchend` event.
+   *
+   * **NOTE** Most of the time, you should use
+   * [touchscreen.tapAndDrag(startX, startY, endX, endY[, options])](https://playwright.dev/docs/api/class-touchscreen#touchscreen-tap-and-drag)
+   * instead.
+   *
+   * @param x X coordinate relative to the main frame's viewport in CSS pixels.
+   * @param y Y coordinate relative to the main frame's viewport in CSS pixels.
+   */
+  up(x: number, y: number): Promise<void>;
 }
 
 /**

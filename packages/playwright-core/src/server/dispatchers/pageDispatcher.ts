@@ -314,6 +314,21 @@ export class PageDispatcher extends Dispatcher<Page, channels.PageChannel, Brows
     await this._page.touchscreen.tap(progress, params.x, params.y);
   }
 
+    async touchscreenDown(params: channels.PageTouchscreenDownParams, progress: Progress): Promise<void> {
+    progress.metadata.point = { x: params.x, y: params.y };
+    await this._page.touchscreen.down(progress, params.x, params.y);
+  }
+
+  async touchscreenMove(params: channels.PageTouchscreenMoveParams, progress: Progress): Promise<void> {
+    progress.metadata.point = { x: params.x, y: params.y };
+    await this._page.touchscreen.move(progress, params.x, params.y);
+  }
+
+  async touchscreenUp(params: channels.PageTouchscreenUpParams, progress: Progress): Promise<void> {
+    progress.metadata.point = { x: params.x, y: params.y };
+    await this._page.touchscreen.up(progress, params.x, params.y);
+  }
+
   async pdf(params: channels.PagePdfParams, progress: Progress): Promise<channels.PagePdfResult> {
     if (!this._page.pdf)
       throw new Error('PDF generation is only supported for Headless Chromium');

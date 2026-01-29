@@ -211,4 +211,3 @@ export class RawTouchscreenImpl implements input.RawTouchscreen {
     }));
   }
 }
-}
