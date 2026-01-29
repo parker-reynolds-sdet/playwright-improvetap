@@ -314,7 +314,7 @@ export class PageDispatcher extends Dispatcher<Page, channels.PageChannel, Brows
     await this._page.touchscreen.tap(progress, params.x, params.y);
   }
 
-    async touchscreenDown(params: channels.PageTouchscreenDownParams, progress: Progress): Promise<void> {
+  async touchscreenDown(params: channels.PageTouchscreenDownParams, progress: Progress): Promise<void> {
     progress.metadata.point = { x: params.x, y: params.y };
     await this._page.touchscreen.down(progress, params.x, params.y);
   }

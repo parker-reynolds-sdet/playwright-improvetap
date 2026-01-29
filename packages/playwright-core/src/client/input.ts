@@ -131,10 +131,10 @@ export class Touchscreen implements api.Touchscreen {
   async tapAndDrag(startX: number, startY: number, endX: number, endY: number, options: { steps?: number } = {}) {
     await this._page._wrapApiCall(async () => {
       const steps = options.steps ?? 10;
-      
+
       // Start touch
       await this.down(startX, startY);
-      
+
       // Move in steps to simulate smooth drag
       for (let i = 1; i <= steps; i++) {
         const progress = i / steps;
@@ -142,7 +142,7 @@ export class Touchscreen implements api.Touchscreen {
         const y = startY + (endY - startY) * progress;
         await this.move(x, y);
       }
-      
+
       // End touch
       await this.up(endX, endY);
     }, { title: 'Tap and drag' });
